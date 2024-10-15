@@ -1,0 +1,20 @@
+## Range
+create table emp_part(emp_id INT, emp_name VARCHAR(100), dept_id INT, salary INT)
+    -> partition by range (salary)(
+    -> partition p1 values less than (100),
+    -> partition p2 values less than (200),
+    -> partition p3 values less than (300),
+    -> partition p4 values less than (maxvalue));
+
+insert into emp_part values(1,'A',1,150),(2,'B',2,250),(3,'C',1,600),(4,'D',3,20);
+select * from emp_part partition (p1);
+
+
+## LIST 
+create table sam(id INT, name VARCHAR(10))
+    -> partition by list(id)(
+    -> partition p1 values in(1,2),
+    -> partition p2 values in(3,4));
+    
+insert into sam values(1,'A'),(2,'B'),(3,'C'),(4,'D');
+select * from sam partition (p1);
