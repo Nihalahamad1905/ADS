@@ -1,0 +1,11 @@
+create table sam(item VARCHAR(10), color VARCHAR(10), num INT);
+
+insert into sam values ('A','Blue',1),('B','Red',2),('A','Pink',2),('C','White',1);
+
+select * from sam;
+
+select item,color,sum(num) as Total from sam group by rollup(item,color);
+select item,color,sum(num) as Total from sam group by cube(item,color);
+
+
+## it only support of mysql above version 8 // download mysql server managment studio for execute
