@@ -1,0 +1,16 @@
+create table sam(id INT, age INT, status VARCHAR(100));
+delimiter $$
+mysql> create trigger age_check
+    -> before insert on sam
+    -> for each row
+    -> begin
+    -> if new.age<18 then
+    -> set new.status='not Applicable';
+      ELSE
+        SET NEW.status = 'Applicable';
+    -> end if;
+    -> end $$
+
+INSERT INTO sam (name, age) VALUES ('A', 17);
+INSERT INTO sam (name, age) VALUES ('B', 21);
+
