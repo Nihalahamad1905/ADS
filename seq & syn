@@ -1,0 +1,30 @@
+CREATE TABLE students (
+    student_id NUMBER PRIMARY KEY,
+    student_name VARCHAR2(50),
+    age NUMBER,
+    course VARCHAR2(50)
+);
+
+CREATE SEQUENCE student_seq
+START WITH 1
+INCREMENT BY 1;
+
+INSERT INTO students (student_id, student_name, age, course)
+VALUES (student_seq.NEXTVAL, 'Alice', 20, 'Computer Science');
+
+INSERT INTO students (student_id, student_name, age, course)
+VALUES (student_seq.NEXTVAL, 'Bob', 22, 'Mechanical Engineering');
+
+select * from students;
+
+///////////////////////////////////////////////////////////////////////////////
+create synonym stu_data for students;
+///////////////////////////////////////////////////////////////////////////////
+
+## IMP
+MySQL did not support sequences natively until version 8.0, and even then, it doesn't have a direct CREATE SEQUENCE command like Oracle. 
+Instead, MySQL relies on the AUTO_INCREMENT attribute for generating unique numbers, especially for primary keys.
+
+MySQL does not support CREATE SYNONYM statements. The closest alternative is to use views to create an alias for tables or queries:
+CREATE VIEW stud AS SELECT * FROM students;
+ 
